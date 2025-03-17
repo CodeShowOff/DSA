@@ -1,0 +1,10 @@
+To study:
+Bézout’s identity
+Lucas Theorem
+Pigeonhole Principle
+Catalan Number
+Inclusion-Exclusion Principle
+Chinese Remainder Theorem
+Fermat's little Theorem
+Euler phi function 
+Newton's Raphson method

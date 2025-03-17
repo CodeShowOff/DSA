@@ -1,0 +1,278 @@
+LeetCode Solution Format Prompt:
+
+Prompt-1:
+
+I will provide Java code solutions that I need to upload on LeetCode, and I want you to respond in a very specific format every time. Note that these format is for LeetCode solution piblishing. Follow these rules strictly:
+
+1. General Format
+
+Always use the Java code editor environment (i.e., within triple backticks java ... ).
+
+Never write anything outside the code editor environment, including explanations, hashtags, or any other text.
+
+Maintain consistent and clean formatting with proper indentation.
+
+2. Structure of the Response
+
+Your response should always include the following sections in the same order:
+
+Follow @CodeShowOff on LinkedIn, Twitter, and Instagram for more coding insights!
+
+Title: [Problem Title]
+
+Approach Name: [Approach Used]
+
+Intuition:
+[Explain the thought process behind the approach. Why does this approach make sense for the problem?]
+
+Example:  
+[Provide a small example to clarify the intuition.]
+
+
+Approach:
+[Describe the approach used in the code and why it was chosen.]
+- Mention the data structures used and why they are suitable.
+- Explain the reasoning behind the approach.
+- Describe the flow of the solution without diving into line-by-line details.
+- Justify the approach with pros and cons (if applicable).
+
+Logic of the Code:
+[Provide a detailed step-by-step explanation of how the code works, including reasons for each step.]
+- Explain the initialization of variables and their purposes.
+- Clarify the working of loops, conditionals, and recursion (if any).
+- Justify the use of specific data structures (e.g., HashMap for constant-time lookups).
+- Explain edge case handling.
+- Mention the significance of returning specific values.
+
+Example:
+1. Step 1: [What is done? Why is it done?]
+2. Step 2: [What is done? Why is it done?]
+3. Step 3: [What is done? Why is it done?]
+
+
+Complexity:
+- Time Complexity: [Explain the time complexity in Big O notation, including the reason behind it.]
+- Space Complexity: [Explain the space complexity, including what is contributing to it.]
+
+
+3. Explanation Guidelines
+
+Intuition: Clearly explain the thinking process behind choosing this approach. Provide a small example to help visualize the approach.
+
+Approach: Describe the approach with reasons:
+
+Why this specific approach was chosen.
+
+Why the data structures used are appropriate.
+
+Why this approach is efficient or optimal.
+
+Logic of the Code: Explain each part of the code, including:
+
+Initialization and purpose of variables.
+
+The reason behind loops, conditionals, and recursion.
+
+Why specific data structures are used.
+
+How edge cases are handled.
+
+Why specific return values are used.
+
+Complexity: Explain both time and space complexity, including the reason for each.
+
+4. Strict Rules to Follow
+
+Never skip any section.
+
+Never write outside the Java code environment.
+
+Always use backticks () for the first line:  
+Follow @CodeShowOff on LinkedIn, Twitter, and Instagram for more coding insights!
+
+Never change the order of sections.
+
+Never add or remove sections unless explicitly asked.
+
+Always maintain clean and consistent formatting.
+
+5. Example of Expected Response Format:
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+`Follow @CodeShowOff on LinkedIn, Twitter, and Instagram for more coding insights!`
+
+# Title
+Product of the Last K Numbers 
+
+
+
+# Approach Name
+Prefix Product with Zero Handling 
+
+
+
+# Intuition
+The task is to efficiently calculate the product of the last k numbers added. The naive approach of multiplying the last k elements directly would be slow for repeated queries. Instead, we can use a **prefix product** approach, where we maintain a running product of all elements.  
+The main challenge arises when encountering a zero, which resets the product. To handle this, we:
+- Clear the prefix product list whenever a zero is added.
+- Start a new product sequence after the zero. 
+ 
+
+# Approach
+- **Using a Prefix Product List**:  
+  Store cumulative products in an ArrayList<Integer> named products. The i-th element in this list represents the product of all numbers from the start up to the i-th number.
+  *Reason*: Using cumulative products allows quick calculation of the product of any subarray by dividing the cumulative product at the end of the range by the cumulative product just before the start of the range.
+
+- **Handling Zeros**:  
+  - If 0 is added, clear the product list and start over by adding 1 as the base product.
+  *Reason*: Any product including 0 becomes 0, so all prior products are invalidated.
+  - If a non-zero number is added, multiply the last product by this number and append the result to the list.
+  *Reason*: This maintains the running product sequence.
+
+- **Querying the Product**:
+  - To get the product of the last k numbers, we divide the most recent product by the product at the position k steps back.
+  - If the requested range includes a zero (detected by insufficient entries in products), return 0.
+  *Reason*: Zeros reset the product sequence, so if the range includes a zero, the product must be zero. 
+ 
+
+# Logic of the code
+1. **Initialization (ProductOfNumbers() method)**:  
+   - Create an ArrayList<Integer> named products and initialize it with 1.  
+     *Reason*: Initializing with 1 simplifies product calculations because multiplying by 1 has no effect.
+   - Initialize prevProduct to 1.  
+     *Reason*: This variable tracks the running product and is used to compute the next product efficiently.
+
+2. **Adding a Number (add(int num) method)**:  
+   - Check if num is 0.  
+     - If true, clear the products list and add 1 to start a new sequence. Also, reset prevProduct to 1.  
+       *Reason*: Since any product including 0 is 0, all prior products become invalid, so a new product sequence starts.
+     - If false, multiply prevProduct by num and append it to the products list.  
+       *Reason*: This maintains the cumulative product sequence.
+
+3. **Getting the Product of the Last K Numbers (getProduct(int k) method)**:  
+   - Calculate the index of the product k steps before the latest product (len - 1 - k).  
+     *Reason*: This represents the start of the subarray whose product we want.
+   - Check if this index is negative.  
+     - If true, return 0.  
+       *Reason*: A negative index means the requested range includes a zero, which resets the product.
+     - If false, calculate the product as:
+    
+        int num1 = products.get(len - 1);
+        int num2 = products.get(len - 1 - k);
+       *Reason*: This uses the prefix product property:  
+       ###### Product of last k numbers = Product up to last element / Product up to element just before last k
+
+4. **Edge Cases Considered**:
+   - Multiple consecutive zeros.
+   - Querying for k greater than the number of elements since the last zero.
+   - Querying after adding 0. 
+ 
+
+# Complexity
+- **Time Complexity**:  
+  - add(int num):  
+    $$O(1)$$ in most cases, as it only involves multiplication and appending to the list.  
+    If num is 0, the list is cleared, which takes $$O(1)$$ amortized over multiple operations.
+  - getProduct(int k):  
+    $$O(1)$$, as it involves only array access and division.
+
+- **Space Complexity**:  
+  $$O(n)$$, where n is the number of elements added since the last zero. This is because the products list grows linearly with the number of additions. 
+ 
+
+
+---
+## Code:
+```java []
+class ProductOfNumbers {
+    ArrayList<Integer> products;
+    int prevProduct;
+
+    public ProductOfNumbers() {
+        this.products = new ArrayList<>();
+        this.prevProduct = 1;
+        products.add(1);
+    }
+    
+    public void add(int num) {
+        if(num == 0){
+            products.clear();
+            products.add(1);
+            prevProduct = 1;
+        }else{
+            prevProduct *= num;
+            products.add(prevProduct);
+        }
+
+    }
+    
+    public int getProduct(int k) {
+        int len = products.size();
+        if(len - 1 - k < 0){
+            return 0;
+        }
+        int num1 = products.get(len - 1);
+        int num2 = products.get(len - 1 - k);
+        return num1 / num2;
+    }
+}
+```
+
+-----------------------------------------------------------------------------------------------------------------
+
+6. Additional Notes
+
+Never deviate from this format unless explicitly requested.
+
+If I request changes or modifications, adapt the response but keep the overall structure intact.
+
+Always prioritize clarity, conciseness, and consistency.
+
+Use this prompt every time I provide a Java solution. If I ask for changes or enhancements, follow the instructions while maintaining the overall structure and rules specified above.
+
+
+
+
+
+
+
+Prompt-2:
+note: you can provide the comments in code for better understanding, but it should be short and to the point only if needed and only for conditions and loop and specific initialization according to requirements of the question.
+
+
+
+
+Prompt-3:
+here,s the reference for the more types of formatting leetcode accepts:
+
+BOLD
+	**This is bolded.**
+	__This is also bolded.__
+	<strong>This too is bolded.</strong>
+
+ITALIC
+	*This is italicized.*
+	_This is also italicized._
+	<em>This too is italicized.</em>
+
+UNDERLINE
+	<ins>This is underlined.</ins>
+
+STRIKETHROUGH
+	~~You can't see me.~~
+
+BLOCKQUOTE
+> This is a blockquote.
+>> This is a nested blockquote.
+>>> You can keep adding nested blockquotes.
+
+SUBSCRIPT / SUPERSCRIPT
+	This text <sub>is subscripted</sub>.
+	This text <sup>is superscripted</sup>.
+	
+INLINE CODE
+	This text is code formatted in-line with regular text.
+
+> Note: You **_can_** <ins>choose ~~to do~~</ins> a combination of these, except for **inline code**.
+
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Maths Required/% Modulus Operator/% Modulus Operator.iml" filepath="$PROJECT_DIR$/Maths Required/% Modulus Operator/% Modulus Operator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/Algorithms.iml" filepath="$PROJECT_DIR$/Algorithms/Algorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DSA.iml" filepath="$PROJECT_DIR$/DSA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataStructures/_JavaCollectionFramework/Hashing/Hashing.iml" filepath="$PROJECT_DIR$/DataStructures/_JavaCollectionFramework/Hashing/Hashing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Maths Required/LCM-HCF (with relation)/LCM-HCF (with relation).iml" filepath="$PROJECT_DIR$/Maths Required/LCM-HCF (with relation)/LCM-HCF (with relation).iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataStructures/Linked List/Linked List.iml" filepath="$PROJECT_DIR$/DataStructures/Linked List/Linked List.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Maths Required/Maths Required.iml" filepath="$PROJECT_DIR$/Maths Required/Maths Required.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/Recursion/Recursion.iml" filepath="$PROJECT_DIR$/Algorithms/Recursion/Recursion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/Sorting_Algorithms/Sorting_Algorithms.iml" filepath="$PROJECT_DIR$/Algorithms/Sorting_Algorithms/Sorting_Algorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/_General/_General.iml" filepath="$PROJECT_DIR$/Algorithms/_General/_General.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataStructures/_JavaCollectionFramework/_JavaCollectionFramework.iml" filepath="$PROJECT_DIR$/DataStructures/_JavaCollectionFramework/_JavaCollectionFramework.iml" />
+    </modules>
+  </component>
+</project>
