@@ -1,0 +1,6 @@
+operations: Insert, Delete, Search 
+Do: Implementation of Binary Tree (insertion and deletion of nodes)
+
+Find the lowest common ancestor
+Find kth smallest and largest elements
+Count number of leaf nodes 

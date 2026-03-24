@@ -1,0 +1,259 @@
+package com.dsa.tree;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+// BinaryTree 
+public class BinaryTree {
+ 
+	// TreeNode
+	private static class TreeNode {
+		int data;
+		TreeNode left, right;
+
+		TreeNode(int val) {
+			this.data = val;
+		}
+
+		@Override
+		public String toString() {
+			return this.data + " ";
+		}
+
+	}
+
+	// buildTree
+	public static TreeNode buildTree(String[] nums) {
+		if (nums.length == 0 || nums[0].equals("N"))
+			return null;
+
+		TreeNode root = new TreeNode(Integer.parseInt(nums[0]));
+
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+
+		int i = 1;
+		while (i < nums.length) {
+			TreeNode temp = queue.poll();
+			if (i < nums.length && !nums[i].equals("N")) {
+				temp.left = new TreeNode(Integer.parseInt(nums[i]));
+				queue.add(temp.left);
+			}
+
+			i++;
+			if (i < nums.length && !nums[i].equals("N")) {
+				temp.right = new TreeNode(Integer.parseInt(nums[i]));
+				queue.add(temp.right);
+			}
+
+			i++;
+		}
+
+		return root;
+	}
+
+	// inOrder
+	public static void inOrder(TreeNode root) {
+		if (root == null)
+			return;
+
+		inOrder(root.left);
+		System.out.print(root);
+		inOrder(root.right);
+
+	}
+
+	// preOrderIt
+	public static void preOrderIt(TreeNode root) {
+		if (root == null)
+			return;
+
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+
+		stack.push(root);
+		while (!stack.isEmpty()) {
+			TreeNode temp = stack.pop();
+			System.out.print(temp);
+			if (temp.right != null)
+				stack.push(temp.right);
+			if (temp.left != null)
+				stack.push(temp.left);
+
+		}
+
+	}
+
+	// inOrderIt
+	public static void inOrderIt(TreeNode root) {
+		if (root == null)
+			return;
+
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+
+		TreeNode curr = root;
+
+		while (curr != null || !stack.isEmpty()) {
+
+			while (curr != null) {
+				stack.push(curr);
+				curr = curr.left;
+			}
+
+			TreeNode temp = stack.pop();
+			System.out.print(temp);
+
+			curr = temp.right;
+
+		}
+
+	}
+
+	// postOrder
+	public static void postOrder(TreeNode root) {
+		if (root == null)
+			return;
+
+		Stack<TreeNode> s1 = new Stack<TreeNode>();
+		Stack<TreeNode> s2 = new Stack<TreeNode>();
+
+		s1.push(root);
+		while (!s1.isEmpty()) {
+			TreeNode temp = s1.pop();
+			s2.push(temp);
+
+			if (temp.left != null)
+				s1.push(temp.left);
+			if (temp.right != null)
+				s1.push(temp.right);
+		}
+
+		while (!s2.isEmpty()) {
+			System.out.print(s2.pop());
+		}
+	}
+
+	// kLevelPrint
+	public static void kLevelPrint(TreeNode root, int k) {
+		if (root == null)
+			return;
+
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+
+		queue.offer(root);
+		int lv = 1;
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+
+			if (lv == k) {
+				while (!queue.isEmpty()) {
+					System.out.print(queue.poll());
+				}
+				return;
+			}
+
+			else {
+				for (int i = 0; i < size; i++) {
+					TreeNode temp = queue.poll();
+					if (temp.left != null)
+						queue.add(temp.left);
+					if (temp.right != null)
+						queue.add(temp.right);
+
+				}
+
+				lv++;
+			}
+		}
+
+	}
+    
+	//height
+	public static int height(TreeNode root) {
+		if (root == null)
+			return 0;
+		return 1 + Math.max(height(root.left), height(root.right));
+	}
+	
+	// countLeafNode
+	public static int countLeafNode(TreeNode root) {
+		if (root == null)
+			return 0;
+
+		if (root.left == null && root.right == null)
+			return 1;
+
+		return countLeafNode(root.left) + countLeafNode(root.right);
+
+	}
+	
+    // sumOfLeafNode
+	public static int sumOfLeafNode(TreeNode root) {
+		if (root == null)
+			return 0;
+
+		if (root.left == null && root.right == null)
+			return root.data;
+
+		return sumOfLeafNode(root.left) + sumOfLeafNode(root.right);
+
+	}
+
+	
+	//diameterOfTree
+	static int dia = 0;
+	public static int diameterOfTree(TreeNode root) {
+		if (root == null)
+			return 0;
+
+		int lh = diameterOfTree(root.left);
+		int rh = diameterOfTree(root.right);
+
+		dia = Math.max(dia, lh + rh);
+		return 1 + Math.max(lh, rh);
+
+	}
+
+	
+	// print root to leaf path 
+	static ArrayList<Integer> path = new ArrayList<Integer>();
+	public static void printAllPathOfLeafNode(TreeNode root) {
+		if (root == null) return ;
+		
+		path.add(root.data);
+		
+		if(root.left == null  && root.right == null) {
+			System.out.println(path);
+		}
+		else {
+			printAllPathOfLeafNode(root.left);
+			printAllPathOfLeafNode(root.right);
+		}
+		
+		path.remove(path.size()-1);
+	}
+	
+	public static void main(String[] args) {
+		String s = "25 15 50 10 22 35 70 4 12 18 24 31 44 66 90";
+		String[] arr = s.split(" ");
+		TreeNode root = buildTree(arr);
+
+		// inOrder(root);
+		// inOrderIt(root);
+		// kLevelPrint(root, 2);
+
+		// System.out.println(height(root));
+
+		// System.out.println(countLeafNode(root));
+	//	System.out.println(sumOfLeafNode(root));
+		
+		
+//		diameterOfTree(root);
+//		System.out.println(dia);
+		
+		printAllPathOfLeafNode(root);
+
+	}
+
+}

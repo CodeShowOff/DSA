@@ -1,3 +1,5 @@
+package DataStructures.Queue;
+
 import java.util.Stack;
 
 public class QueueUsingStack2 {

@@ -1,0 +1,32 @@
+class Solution {
+    public int minimumDistance(int[] nums) {
+        HashMap<Integer, ArrayList<Integer>> pos = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++){
+            int x = nums[i];
+            if(!pos.containsKey(x)){
+                pos.put(x, new ArrayList<Integer>());
+            }
+            pos.get(x).add(i);
+        }
+        
+        int min = Integer.MAX_VALUE;
+
+        for(List<Integer> list : pos.values()){
+            if(list.size() < 3) continue;
+
+            for(int i = 0; i + 2 < list.size(); i++){
+                int first = list.get(i);
+                int second = list.get(i + 2);
+                int gap = second - first;
+                int dist = 2 * gap;
+                if(dist < min){
+                    min = dist;
+                }
+            }
+        }
+
+        if(min == Integer.MAX_VALUE) return -1;
+        return min;
+    }
+}©leetcode

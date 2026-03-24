@@ -1,4 +1,4 @@
-package com.StackImplementation;
+package ProjectStack.com.StackImplementation;
 
 import java.util.EmptyStackException;
 
